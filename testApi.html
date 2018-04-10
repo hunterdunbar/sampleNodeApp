@@ -1,0 +1,160 @@
+<html>
+
+<body>
+<button id="btn">Get Accounts</button>
+<button id="getAccount">Get One Accounts</button>
+<button id="createAccount">Create New Account</button>
+<button id="updateAccount">Update an Account</button>
+<button id="deleteAccount">Delete an Account</button>
+<br>
+<h3>Get Accounts Response</h3>
+<p id="btnResponse"></p>
+<h3>Get One Account Response</h3>
+<p id="getAccountResponse"></p>
+<h3>Create New Account Response</h3>
+<p id="createAccountResponse"></p>
+<h3>Update an Account Response</h3>
+<p id="updateAccountResponse"></p>
+<h3>Delete an Account Response</h3>
+<p id="deleteAccountResponse"></p>
+</body>
+<script>
+  var url =
+  var btn = document.getElementById("btn");
+  btn.addEventListener("click",function(){
+    console.log(window.location.protocol+"//"+window.location.host+"/api");
+    var url = window.location.protocol+"//"+window.location.host+"/api";
+    var httpreq = new XMLHttpRequest();
+    httpreq.open("GET", url, true);
+    httpreq.send();
+    httpreq.onreadystatechange = function() {
+      if (httpreq.readyState != 4) return; // Not there yet
+      if (httpreq.status != 200) {
+        // Handle request failure here...
+        return;
+      }
+      // Request successful, read the response
+      var resp = httpreq.responseText;
+      document.getElementById("btnResponse").innerHTML = resp;
+      // ... and use it as needed by your app.
+    }
+  });
+
+  var getOneAccount = document.getElementById("getAccount");
+  getOneAccount.addEventListener("click",function(){
+    console.log(window.location.protocol+"//"+window.location.host+"/api");
+    var url = window.location.protocol+"//"+window.location.host+"/api/getAccount/";
+    var x = prompt("Please enter a sample Account Id");
+    url += x;
+    var httpreq = new XMLHttpRequest();
+    httpreq.open("GET", url, true);
+    httpreq.send();
+    httpreq.onreadystatechange = function() {
+      if (httpreq.readyState != 4) return; // Not there yet
+      if (httpreq.status != 200) {
+        // Handle request failure here...
+        return;
+      }
+      // Request successful, read the response
+      var resp = httpreq.responseText;
+      document.getElementById("getAccountResponse").innerHTML = resp;
+      // ... and use it as needed by your app.
+    }
+  });
+
+  var createAccount = document.getElementById("createAccount");
+  createAccount.addEventListener("click",function(){
+    console.log(window.location.protocol+"//"+window.location.host+"/api");
+    var url = window.location.protocol+"//"+window.location.host+"/api/createAccount/";
+    var name = prompt("Please enter a name for the account");
+    var address = prompt("Please enter an address for the account");
+    var phone = prompt("Please enter a phone for the account");
+    var email = prompt("Please enter an email for the account");
+    var owner = prompt("Please enter an owner for the account");
+    var obj = {
+      "name":name,
+      "email":email,
+      "address":address,
+      "phone":phone,
+      "owner":owner
+    }
+    var objJson = JSON.stringify(obj);
+    var httpreq = new XMLHttpRequest();
+    httpreq.open("POST", url);
+    httpreq.setRequestHeader("Content-Type", "application/json");
+    httpreq.send(objJson);
+    httpreq.onreadystatechange = function() {
+      if (httpreq.readyState != 4) return; // Not there yet
+      if (httpreq.status != 200) {
+        // Handle request failure here...
+        return;
+      }
+      // Request successful, read the response
+      var resp = httpreq.responseText;
+      document.getElementById("createAccountResponse").innerHTML = resp;
+      // ... and use it as needed by your app.
+    }
+  });
+
+
+  var updateAccount = document.getElementById("updateAccount");
+  updateAccount.addEventListener("click",function(){
+    console.log(window.location.protocol+"//"+window.location.host+"/api");
+    var url = window.location.protocol+"//"+window.location.host+"/api/updateAccount/";
+    var accountId = prompt("Please enter an account id to update");
+    url += accountId;
+    var name = prompt("Please enter a new name for the account");
+    var address = prompt("Please enter a new address for the account");
+    var phone = prompt("Please enter a new phone for the account");
+    var email = prompt("Please enter a new email for the account");
+    var owner = prompt("Please enter a new owner for the account");
+    var obj = {
+      "name":name,
+      "email":email,
+      "address":address,
+      "phone":phone,
+      "owner":owner
+    }
+    var objJson = JSON.stringify(obj);
+    var httpreq = new XMLHttpRequest();
+    httpreq.open("PUT", url);
+    httpreq.setRequestHeader("Content-Type", "application/json");
+    httpreq.send(objJson);
+    httpreq.onreadystatechange = function() {
+      if (httpreq.readyState != 4) return; // Not there yet
+      if (httpreq.status != 200) {
+        // Handle request failure here...
+        return;
+      }
+      // Request successful, read the response
+      var resp = httpreq.responseText;
+      document.getElementById("updateAccountResponse").innerHTML = resp;
+      // ... and use it as needed by your app.
+    }
+  });
+
+  var deleteAccount = document.getElementById("deleteAccount");
+  deleteAccount.addEventListener("click",function(){
+    console.log(window.location.protocol+"//"+window.location.host+"/api");
+    var url = window.location.protocol+"//"+window.location.host+"/api/deleteAccount/";
+    var accountId = prompt("Please enter an account id to delete");
+    url += accountId;
+    var httpreq = new XMLHttpRequest();
+    httpreq.open("DELETE", url);
+    //httpreq.setRequestHeader("Content-Type", "application/json");
+    httpreq.send();
+    httpreq.onreadystatechange = function() {
+      if (httpreq.readyState != 4) return; // Not there yet
+      if (httpreq.status != 200) {
+        // Handle request failure here...
+        return;
+      }
+      // Request successful, read the response
+      var resp = httpreq.responseText;
+      document.getElementById("deleteAccountResponse").innerHTML = resp;
+      // ... and use it as needed by your app.
+    }
+  });
+
+</script>
+</html>

@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to Express CRM: Use the form below to enter accounts. As you add new accounts, they will be displayed below.
+  .main.container
+    .row
+      .col-md-6.col-md-offset-3
+        h3 Create Accounts
+        //This form collects the information that will be used to add Accounts to the app.locals.accList variable
+        form(method='POST' action="/accounts")
+          div.form-group
+            label(for='name') Account Name:
+            input#name.form-control(type='text', placeholder='first and last' name='name')
+          div.form-group
+            label(for='email') Primary Contact Email:
+            input#email.form-control(type='email', placeholder='name@email.com' name='email')
+          div.form-group
+            label(for='address') Address:
+            input#favoriteBook.form-control(type='text', placeholder='123 Main St Cambridge, MA 01253' name='address')
+          div.form-group
+            label(for='phone') Phone:
+            input#pw.form-control(type='text' name='phone')
+          div.form-group
+            label(for='owner') Account Owner:
+            input#pw.form-control(type='text' name='owner')
+          button.btn.btn-primary(type='submit') Create Account
+  br
+  //Then add a link where uers can view all accounts that have been added.
+  a(href='/getAccounts') View All Accounts

@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .main.emailcontainer
+    .row
+      .col-md-6.col-md-offset-3
+        h3 Send an Email to #{emailAddress}
+        form(method='POST' action="/sendEmail/" + emailAddress)
+          div.form-group
+            label(for='subject') Subject:
+            input#pw.form-control(type='text' name='subject')
+          div.form-group
+            label(for='emailContent') Content:
+            input#textAreaInput(type='text' name='emailContent')
+          button.btn.btn-primary(type='submit') Send Email
+          br
+          br
+          button.btn.btn-primary(onclick='/getAccounts') Back

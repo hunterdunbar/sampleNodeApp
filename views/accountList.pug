@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  //If there are accounts we will add them in a table.
+  if accountList.length > 0
+    table
+      thead
+        tr
+          th Name
+          th Email
+          th Address
+          th Phone
+          th Owner
+          th Edit Account
+      tbody
+        each val in accountList
+          tr
+            td #{val.name}
+            td #{val.email}
+            td #{val.address}
+            td #{val.phone}
+            td #{val.owner}
+            td
+              a(class='editLnk' href='/updateAccount/'+val._id) Edit
+              br
+              a(class='editLnk' href='/deleteAccount/'+val._id) Delete
+              br
+              a(class='editLnk' href='/sendEmail/'+val.email) Email
+    a(href='/') Back to Account Entry
+    //Otherwise just provide a link back to the Account Entry page.
+  else
+    h2 No accounts are created yet.
+    a(href='/') Back to Account Entry

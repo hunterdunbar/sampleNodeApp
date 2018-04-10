@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  form(method='POST' action="/accounts/"+accountList._id)
+    table
+      thead
+        tr
+          th Old Value
+          th New Value
+        tbody
+          tr
+            td
+              p Name: #{accountList.name}
+            td.editInput
+              input#name.form-control(type='text' name='name')
+          tr
+            td
+              p Email: #{accountList.email}
+            td.editInput
+              input#email.form-control(type='email' name='email')
+          tr
+            td
+              p Address: #{accountList.address}
+            td.editInput
+              input#name.form-control(type='text' name='address')
+          tr
+            td
+              p Phone: #{accountList.phone}
+            td.editInput
+              input#name.form-control(type='text' name='phone')
+          tr
+            td
+              p Owner: #{accountList.owner}
+            td.editInput
+              input#name.form-control(type='text' name='owner')
+    button.btn.btn-primary(type='submit') Update Account
